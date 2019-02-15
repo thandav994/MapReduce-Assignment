@@ -32,7 +32,6 @@ public class Part2 {
 	}
 
 	public static class RatingAverageReducer extends Reducer<LongWritable, DoubleWritable, LongWritable, DoubleWritable> {
-		private DoubleWritable result = new DoubleWritable();
 		private Map<LongWritable, DoubleWritable> averageMap = new HashMap<LongWritable, DoubleWritable>();
 
 		public void reduce(LongWritable key, Iterable<DoubleWritable> values, Context context)
@@ -44,24 +43,22 @@ public class Part2 {
 				count += 1;
 			}
 			double average = sum / count;
-			result.set(average);
-			averageMap.put(key, result);
-			context.write(key, result);
+			averageMap.put(new LongWritable(key.get()), new DoubleWritable(average));
 		}
 
-//		@Override
-//		protected void cleanup(Context context) throws IOException, InterruptedException {
-//
-//			Map<LongWritable, DoubleWritable> sortedMap = MiscUtils.sortByValues(averageMap);
-//
-//			int counter = 0;
-//			for (LongWritable key : sortedMap.keySet()) {
-//				if (counter++ == 20) {
-//					break;
-//				}
-//				context.write(key, sortedMap.get(key));
-//			}
-//		}
+		@Override
+		protected void cleanup(Context context) throws IOException, InterruptedException {
+
+			Map<LongWritable, DoubleWritable> sortedMap = MiscUtils.sortByValues(averageMap);
+
+			int counter = 0;
+			for (LongWritable key : sortedMap.keySet()) {
+				if (counter++ == 20) {
+					break;
+				}
+				context.write(key, sortedMap.get(key));
+			}
+		}
 	}
 
 	public static void main(String[] args) throws Exception {
