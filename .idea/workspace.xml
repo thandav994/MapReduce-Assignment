@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d2751fb9-1a87-41de-979d-1810a3db9c41" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/assignment1b/main/Part2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment1b/main/Part2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/assignment1b/main/Part2$RatingAverageReducer.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/assignment1b/main/Part2$RatingAverageReducer.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/assignment1b/main/Part2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/assignment1b/main/Part2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/assignment1b/main/Part1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/assignment1b/main/Part1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Assignment1b-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/target/Assignment1b-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/assignment1b/main/Part1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/assignment1b/main/Part1.class" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,12 +42,12 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/assignment1b/main/Part1.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-68">
-              <caret line="41" column="13" lean-forward="true" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
+            <state relative-caret-position="119">
+              <caret line="48" column="13" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
               <folding>
-                <element signature="e#2133#2134#0" expanded="true" />
-                <element signature="e#2171#2172#0" expanded="true" />
-                <element signature="e#2370#2389#0" expanded="true" />
+                <element signature="e#2406#2407#0" expanded="true" />
+                <element signature="e#2446#2447#0" expanded="true" />
+                <element signature="e#3452#3471#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -165,12 +166,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1550221260087</updated>
-      <workItem from="1550221263906" duration="5452000" />
+      <workItem from="1550221263906" duration="7960000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5452000" />
+    <option name="totallyTimeSpent" value="7960000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -226,12 +227,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/assignment1b/main/Part1.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-68">
-          <caret line="41" column="13" lean-forward="true" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
+        <state relative-caret-position="119">
+          <caret line="48" column="13" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
           <folding>
-            <element signature="e#2133#2134#0" expanded="true" />
-            <element signature="e#2171#2172#0" expanded="true" />
-            <element signature="e#2370#2389#0" expanded="true" />
+            <element signature="e#2406#2407#0" expanded="true" />
+            <element signature="e#2446#2447#0" expanded="true" />
+            <element signature="e#3452#3471#0" expanded="true" />
           </folding>
         </state>
       </provider>

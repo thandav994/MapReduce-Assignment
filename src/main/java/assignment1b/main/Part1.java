@@ -28,6 +28,13 @@ public class Part1 {
 		private final static IntWritable one = new IntWritable(1);
 		private Text word = new Text();
 
+		@Override
+		protected void setup(Mapper<Object, Text, Text, IntWritable>.Context context)
+				throws IOException, InterruptedException {
+			super.setup(context);
+			populateStopWords();
+		}
+
 		public void map(Object key, Text value, Context context) throws IOException, InterruptedException {
 			StringTokenizer itr = new StringTokenizer(value.toString());
 			String token;
@@ -41,62 +48,62 @@ public class Part1 {
 				}
 			}
 		}
-	}
 
-	public static void populateStopWords() {
-		Scanner sc = null;
-		try {
-			sc = new Scanner(new URL("https://www.textfixer.com/tutorials/common-english-words-with-contractions.txt")
-					.openStream(), "UTF-8");
-			String stopWordsString = sc.useDelimiter("\\A").next();
-			// Removing symbols in stop words
-			stopWordsString = stopWordsString.replaceAll("[^A-Za-z0-9,]", "");
-			stopWords = new HashSet<String>(Arrays.asList(stopWordsString.split(",")));
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			sc.close();
+		public static void populateStopWords() {
+			Scanner sc = null;
+			try {
+				System.setProperty("https.protocols", "TLSv1,TLSv1.1,TLSv1.2");
+				sc = new Scanner(
+						new URL("https://www.textfixer.com/tutorials/common-english-words-with-contractions.txt")
+								.openStream());
+				String stopWordsString = sc.useDelimiter("\\A").next();
+				// Removing symbols in stop words
+				stopWordsString = stopWordsString.replaceAll("[^A-Za-z0-9,]", "");
+				stopWords = new HashSet<String>(Arrays.asList(stopWordsString.split(",")));
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} finally {
+				sc.close();
+			}
 		}
-	}
 
-	public static boolean isAStopWord(String word) {
-		return stopWords.contains(word);
+		public static boolean isAStopWord(String word) {
+			return stopWords.contains(word);
+		}
+
 	}
 
 	public static class IntSumReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
-		private IntWritable result = new IntWritable();
 		private Map<Text, IntWritable> countMap = new HashMap<Text, IntWritable>();
-		
+
 		public void reduce(Text key, Iterable<IntWritable> values, Context context)
 				throws IOException, InterruptedException {
 			int sum = 0;
-			
+
 			for (IntWritable val : values) {
 				sum += val.get();
 			}
-			result.set(sum);
-			countMap.put(new Text(key), result);
+			countMap.put(new Text(key), new IntWritable(sum));
 		}
-		
+
 		@Override
-        protected void cleanup(Context context) throws IOException, InterruptedException {
+		protected void cleanup(Context context) throws IOException, InterruptedException {
 
-            Map<Text, IntWritable> sortedMap = MiscUtils.sortByValues(countMap);
+			Map<Text, IntWritable> sortedMap = MiscUtils.sortByValues(countMap);
 
-            int counter = 0;
-            for (Text key : sortedMap.keySet()) {
-                if (counter++ == 20) {
-                    break;
-                }
-                context.write(key, sortedMap.get(key));
-            }
-        }
+			int counter = 0;
+			for (Text key : sortedMap.keySet()) {
+				if (counter++ == 20) {
+					break;
+				}
+				context.write(key, sortedMap.get(key));
+			}
+		}
 	}
-	
 
 	public static void main(String[] args) throws Exception {
 		Configuration conf = new Configuration();
@@ -104,7 +111,6 @@ public class Part1 {
 		conf.set("yarn.resourcemanager.address", "cshadoop1.utdallas.edu:8032");
 		conf.set("mapreduce.framework.name", "yarn");
 		Job job = Job.getInstance(conf, "Part 1");
-		populateStopWords();				// Populates stop words
 		job.setJarByClass(Part1.class);
 		job.setMapperClass(TokenizerMapper.class);
 		job.setCombinerClass(IntSumReducer.class);
@@ -113,7 +119,7 @@ public class Part1 {
 		job.setOutputValueClass(IntWritable.class);
 		FileInputFormat.setInputDirRecursive(job, true);
 		FileInputFormat.addInputPath(job, new Path(args[0]));
-		FileOutputFormat.setOutputPath(job, new Path(args[1]));	
+		FileOutputFormat.setOutputPath(job, new Path(args[1]));
 		System.exit(job.waitForCompletion(true) ? 0 : 1);
 	}
 }
